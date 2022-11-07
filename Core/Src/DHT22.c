@@ -1,7 +1,9 @@
 #include "DHT22.h"
 
-void DHTInit() {
+DHTHandler a;
 
+void DHTInit() {
+    HAL_GetTick();
 }
 
 void DHTStart() {

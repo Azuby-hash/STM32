@@ -5,17 +5,16 @@
 #include "stm32f1xx_hal.h"
 #include "stdint.h"
 
-uint16_t getTemp();
-uint16_t getHumidity();
+typedef struct {
+    uint32_t time;
+    GPIO_TypeDef* port;
+    uint16_t pin;
+    float temp;
+    float humidity;
+}DHTHandler;
 
-class DHTHandler {
-    public:
-        void DHTInit();
-        void DHTStart();
-        uint16_t DHTGetTemp();
-        uint16_t DHTGetHumidity();
-        void DHTStop();
-    private:
-};
+void dhtInitHandler(DHTHandler* handler, GPIO_TypeDef* port, uint16_t pin);
+uint16_t dhtGetTemp();
+uint16_t dhtGetHumidity();
 
 #endif

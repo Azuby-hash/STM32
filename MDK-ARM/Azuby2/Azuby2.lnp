@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"azuby2\startup_stm32f103xb.o"
+"azuby2\main.o"
+"azuby2\stm32f1xx_it.o"
+"azuby2\stm32f1xx_hal_msp.o"
+"azuby2\stm32f1xx_hal_gpio_ex.o"
+"azuby2\stm32f1xx_hal_adc.o"
+"azuby2\stm32f1xx_hal_adc_ex.o"
+"azuby2\stm32f1xx_hal.o"
+"azuby2\stm32f1xx_hal_rcc.o"
+"azuby2\stm32f1xx_hal_rcc_ex.o"
+"azuby2\stm32f1xx_hal_gpio.o"
+"azuby2\stm32f1xx_hal_dma.o"
+"azuby2\stm32f1xx_hal_cortex.o"
+"azuby2\stm32f1xx_hal_pwr.o"
+"azuby2\stm32f1xx_hal_flash.o"
+"azuby2\stm32f1xx_hal_flash_ex.o"
+"azuby2\stm32f1xx_hal_exti.o"
+"azuby2\stm32f1xx_hal_tim.o"
+"azuby2\stm32f1xx_hal_tim_ex.o"
+"azuby2\system_stm32f1xx.o"
+--strict --scatter "Azuby2\Azuby2.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Azuby2.map" -o Azuby2\Azuby2.axf

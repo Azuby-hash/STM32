@@ -1,5 +1,7 @@
 --cpu Cortex-M3
 "azuby2\startup_stm32f103xb.o"
+"azuby2\delay_timer.o"
+"azuby2\dht.o"
 "azuby2\main.o"
 "azuby2\stm32f1xx_it.o"
 "azuby2\stm32f1xx_hal_msp.o"

@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "DHT.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +44,9 @@ ADC_HandleTypeDef hadc1;
 TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
-
+DHT_Name dht22;
+uint16_t temp;
+uint16_t humi;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,7 +94,7 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-	
+	DHT_Init(&dht22, DHT22, &htim4, GPIOA, GPIO_PIN_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,6 +104,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		
+		DHT_ReadTempHum(&dht22);
+		temp = dht22.Temp;
+		humi = dht22.Humi;
+		HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
@@ -218,7 +225,7 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 1 */
   htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 0;
+  htim4.Init.Prescaler = 72;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim4.Init.Period = 65535;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -262,7 +269,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(Led_GPIO_Port, Led_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DHT22_GPIO_Port, DHT22_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : Led_Pin */
   GPIO_InitStruct.Pin = Led_Pin;
@@ -271,12 +278,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(Led_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : DHT22_Pin */
-  GPIO_InitStruct.Pin = DHT22_Pin;
+  /*Configure GPIO pin : PA1 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DHT22_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA9 */
   GPIO_InitStruct.Pin = GPIO_PIN_9;

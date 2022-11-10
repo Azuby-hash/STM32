@@ -47,6 +47,7 @@ TIM_HandleTypeDef htim4;
 DHT_Name dht22;
 uint16_t temp;
 uint16_t humi;
+uint16_t t;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,6 +105,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		HAL_ADC_Start(&hadc1);
+		HAL_ADC_PollForConversion(&hadc1, 1000);
+		t = HAL_ADC_GetValue(&hadc1);
+		HAL_ADC_Stop(&hadc1);
+		
 		
 		DHT_ReadTempHum(&dht22);
 		temp = dht22.Temp;

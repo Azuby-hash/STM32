@@ -56,7 +56,7 @@ static uint8_t DHT_Start(DHT_Name* DHT)
 	uint8_t Response = 0;
 	DHT_SetPinOut(DHT);  
 	DHT_WritePin(DHT, 0);
-	DHT_DelayUs(DHT, 40000);   
+	DHT_DelayUs(DHT, 18000);   
 	DHT_SetPinIn(DHT);    
 	DHT_DelayUs(DHT, 40); 
 	if (!DHT_ReadPin(DHT))

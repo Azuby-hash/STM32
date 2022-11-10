@@ -51,9 +51,8 @@ static uint8_t DHT_ReadPin(DHT_Name* DHT)
 	return Value;
 }
 //********************************* Middle level Layer ****************************************************//
-static uint8_t DHT_Start(DHT_Name* DHT)
+static void DHT_Start(DHT_Name* DHT)
 {
-	uint8_t Response = 0;
 	DHT_SetPinOut(DHT);  
 	DHT_WritePin(DHT, 0);
 	DHT_DelayUs(DHT, 18000);   
@@ -62,20 +61,12 @@ static uint8_t DHT_Start(DHT_Name* DHT)
 	if (!DHT_ReadPin(DHT))
 	{
 		DHT_DelayUs(DHT, 40); 
-		if(DHT_ReadPin(DHT))
-		{
-			Response = 1;   
-		}
-		else Response = 0;  
 	}		
 	while(DHT_ReadPin(DHT));
-
-	return Response;
 }
 static uint8_t DHT_Read(DHT_Name* DHT)
 {
 	uint8_t Value = 0;
-	DHT_SetPinIn(DHT);
 	for(int i = 0; i<8; i++)
 	{
 		while(!DHT_ReadPin(DHT));
